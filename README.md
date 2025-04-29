@@ -28,10 +28,10 @@ USE bookstore;
 
 CREATE TABLE books (
   idBooks INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255),
-  author VARCHAR(255),
-  publisher VARCHAR(255),
-  stock INT
+  name VARCHAR(100) NOT NULL,
+  author VARCHAR(100) NOT NULL,
+  publisher VARCHAR(50) NOT NULL,
+  stock INT NOT NULL
 );
 ```
 
@@ -45,16 +45,60 @@ Respuesta:
 
 ```
 {
-  "info": { "count": 3 },
-  "result": [
-    {
-      "idBooks": 1,
-      "name": "Estupor y temblores",
-      "author": "Amélie Nothomb",
-      "publisher": "Anagrma",
-      "stock": 1
-    }
-  ]
+    "info": {
+        "count": 7
+    },
+    "result": [
+        {
+            "idBooks": 1,
+            "name": "Estupor y temblores",
+            "author": "Amélie Nothomb",
+            "publisher": "Anagrama",
+            "stock": 1
+        },
+        {
+            "idBooks": 2,
+            "name": "Hamnet",
+            "author": "Maggie O`Farrell",
+            "publisher": "Libros del Asteroide",
+            "stock": 3
+        },
+        {
+            "idBooks": 3,
+            "name": "Canto yo y la montaña baila",
+            "author": "Irene Solà",
+            "publisher": "Anagrama",
+            "stock": 2
+        },
+        {
+            "idBooks": 4,
+            "name": "Lo que hay",
+            "author": "Sara Torres",
+            "publisher": "Reservoir Books",
+            "stock": 1
+        },
+        {
+            "idBooks": 5,
+            "name": "Las niñas prodigio",
+            "author": "Sabina Urraca",
+            "publisher": "Fulgencio Pimentel",
+            "stock": 1
+        },
+        {
+            "idBooks": 6,
+            "name": "Un lugar soleado para gente sombría",
+            "author": "Mariana Enríquez",
+            "publisher": "Anagrama",
+            "stock": 4
+        },
+        {
+            "idBooks": 10,
+            "name": "El Palacio de la Luna",
+            "author": "Paul Auster",
+            "publisher": "Anagrama",
+            "stock": 2
+        }
+    ]
 }
 ```
 
