@@ -21,6 +21,7 @@ DB_PASSWORD=tu_contraseña_mysql
  
 - Asegúrate de tener una base de datos llamada bookstore con la tabla books:
 
+```
 CREATE DATABASE bookstore;
 
 USE bookstore;
@@ -31,98 +32,96 @@ CREATE TABLE books (
   author VARCHAR(255),
   publisher VARCHAR(255),
   stock INT
-); ```
+);
+```
 
 
 
-🧪 Endpoints disponibles
-📖 1. Listar todos los libros
+## Endpoints disponibles
+1. Listar todos los libros
 GET /api/books
 
 Respuesta:
 
-json
-Copiar
-Editar
+```
 {
   "info": { "count": 3 },
   "result": [
     {
       "idBooks": 1,
-      "name": "El Principito",
-      "author": "Antoine de Saint-Exupéry",
-      "publisher": "Reynal & Hitchcock",
-      "stock": 10
+      "name": "Estupor y temblores",
+      "author": "Amélie Nothomb",
+      "publisher": "Anagrma",
+      "stock": 1
     }
   ]
 }
-➕ 2. Agregar un nuevo libro
+```
+
+2. Agregar un nuevo libro
 POST /api/book
 
 Body:
 
-json
-Copiar
-Editar
+```
 {
-  "name": "1984",
-  "author": "George Orwell",
-  "publisher": "Secker & Warburg",
-  "stock": 5
+  "name": "Nada",
+  "author": "Carmen Laforet",
+  "publisher": "Austral",
+  "stock": 3
 }
+
 Respuesta:
 
-json
-Copiar
-Editar
+```
 {
   "success": true,
-  "id": 4
+  "id": 11
 }
-✏️ 3. Editar un libro existente
+
+```
+
+3. Editar un libro existente
 PUT /api/book/:id
 
 Body:
 
-json
-Copiar
-Editar
+```
 {
-  "name": "1984 (Edición revisada)",
-  "author": "George Orwell",
-  "publisher": "Penguin Books",
+  "name": "Nada",
+  "author": "Carmen Laforet",
+  "publisher": "Austral",
   "stock": 8
 }
+```
 Respuesta:
 
-json
-Copiar
-Editar
+```
 {
   "success": true,
-  "id": null
+  "id": 0
 }
-⚠️ Nota: el campo insertId no se aplica a actualizaciones. Considera devolver affectedRows para mayor claridad.
+```
 
-❌ 4. Borrar un libro
+4. Borrar un libro
 DELETE /api/book/:id
 
 Respuesta:
 
-json
-Copiar
-Editar
+``` 
 {
   "success": true,
   "message": "Removed resource"
 }
-⚙️ Tecnologías usadas
-Node.js
+```
 
-Express.js
+## Tecnologías usadas
+- Node.js
 
-MySQL2
+- Express.js
 
-Dotenv
+- MySQL2
 
-CORS
+- Dotenv
+
+- CORS
