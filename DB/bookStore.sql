@@ -1,6 +1,6 @@
-CREATE DATABASE bookStore;
+CREATE DATABASE bookstore;
 
-USE bookStore;
+USE bookstore;
 
 CREATE TABLE clients (
 idClients INT AUTO_INCREMENT PRIMARY KEY,
@@ -45,5 +45,11 @@ VALUES
 (1, 3),
 (2, 3), 
 (3, 1);
+
+SELECT * FROM books;
+INSERT INTO books (name, author, publisher, stock)
+VALUES ('Las niñas prodigio', 'Sabina Urraca', 'Fulgencio Pimentel', 1);
+UPDATE books SET stock = 5 WHERE idBooks= 6;
+DELETE FROM books WHERE idBooks = 7;
 
 

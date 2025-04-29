@@ -27,54 +27,123 @@ async function getDBConnection() {
 
 //INSERTAR UNA ENTRADA
 server.post("/api/book", async (req, res) => {
-  const connection = await getDBConnection();
-  const { name, author, publisher, stock } = req.body;
+  try {
+    const connection = await getDBConnection();
 
-  const sqlQuery =
-    "INSERT INTO books (name, author, publisher, stock) VALUES (?, ?, ?, ?)";
-  const [result] = await connection.query(sqlQuery, [
-    name,
-    author,
-    publisher,
-    stock,
-  ]);
+    if (!req.body) {
+      res.status(404).json({
+        success: false,
+        message: "Provide the params",
+      });
+    } else {
+      const { name, author, publisher, stock } = req.body;
+      if (!name || !author || !publisher || stock === null) {
+        res.status(404).json({
+          success: false,
+          message: "Bad params! Provide 'name', 'author', 'publisher', 'stock'",
+        });
+      } else {
+        const sqlQuery =
+          "INSERT INTO books (name, author, publisher, stock) VALUES (?, ?, ?, ?)";
+        const [result] = await connection.query(sqlQuery, [
+          name,
+          author,
+          publisher,
+          stock,
+        ]);
 
-  connection.end();
-  res.status(201).json({
-    success: true,
-    id: result.insertId,
-  });
+        connection.end();
+        res.status(201).json({
+          success: true,
+          id: result.insertId,
+        });
+      }
+    }
+  } catch (err) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal error. Contact with support",
+    });
+  }
 });
 
 // LEER/LISTAR TODAS LAS ENTRADAS EXISTENTES
 server.get("/api/books", async (req, res) => {
-  const connection = await getDBConnection();
-  const sqlQuery = "SELECT * FROM books";
-  const [booksResult] = await connection.query(sqlQuery);
-  console.log(booksResult);
-  connection.end();
-  res.json({});
+  try {
+    const connection = await getDBConnection();
+    const sqlQuery = "SELECT * FROM books";
+    const [booksResult] = await connection.query(sqlQuery);
+    console.log(booksResult);
+    connection.end();
+    res.status(200).json({
+      info: {
+        count: booksResult.length,
+      },
+      result: booksResult,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal error. Contact with support",
+    });
+  }
 });
 
 //ACTUALIZAR UNA ENTRADA EXISTENTE
 server.put("/api/book/:id", async (req, res) => {
-  const connection = await getDBConnection();
-  const { id } = req.params;
+  try {
+    const connection = await getDBConnection();
 
-  const { name, author, publisher, stock } = req.body;
-  const sqlQuery =
-    "UPDATE books SET name = ?, author = ?, publisher = ?, stock = ? WHERE idBooks= ?";
-  const [result] = await connection.query(sqlQuery, [
-    name,
-    author,
-    publisher,
-    stock,
-    id,
-  ]);
-  console.log(result);
-  connection.end();
-  res.status(200).json({
-    success: true,
-    id: result.insertId,
-  });
+    const { id } = req.params;
+
+    const { name, author, publisher, stock } = req.body;
+
+    if (!name || !author || !publisher || stock === null) {
+      res.status(404).json({
+        success: false,
+        message: "Bad params! Provide 'name', 'author', 'publisher', 'stock'",
+      });
+    } else {
+      const sqlQuery =
+        "UPDATE books SET name = ?, author = ?, publisher = ?, stock = ? WHERE idBooks= ?";
+      const [result] = await connection.query(sqlQuery, [
+        name,
+        author,
+        publisher,
+        stock,
+        id,
+      ]);
+      connection.end();
+      res.status(200).json({
+        success: true,
+        id: result.insertId,
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal error. Contact with support",
+    });
+  }
+});
+
+//BORRAR UNA ENTRADA
+server.delete("/api/book/:id", async (req, res) => {
+  try {
+    const connection = await getDBConnection();
+    const { id } = req.params;
+    const sqlQuery = "DELETE FROM books WHERE idBooks = ?";
+    const [result] = await connection.query(sqlQuery, [id]);
+
+    connection.end();
+    res.json({
+      success: true,
+      message: "Removed resource",
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal error. Contact with support",
+    });
+  }
 });
