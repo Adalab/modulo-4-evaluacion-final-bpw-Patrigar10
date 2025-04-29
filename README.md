@@ -13,9 +13,8 @@ cd nombre-repo`
 `npm install`
 
 - Crea un archivo .env con tus credenciales de base de datos:
-
 ```DB_USER=tu_usuario_mysql
-DB_PASSWORD=tu_contraseña_mysql```
+ DB_PASSWORD=tu_contraseña_mysql´´´
  
 - Asegúrate de tener una base de datos llamada bookstore con la tabla books:
 
