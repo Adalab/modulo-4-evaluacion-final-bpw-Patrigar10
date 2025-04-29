@@ -114,6 +114,7 @@ Body:
   "publisher": "Austral",
   "stock": 3
 }
+```
 
 Respuesta:
 
