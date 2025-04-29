@@ -38,7 +38,8 @@ CREATE TABLE books (
 
 
 ## Endpoints disponibles
-1. Listar todos los libros
+1. Listar todos los libros:
+   
 **GET /api/books**
 
 Respuesta:
@@ -102,7 +103,8 @@ Respuesta:
 }
 ```
 
-2. Agregar un nuevo libro
+2. Agregar un nuevo libro:
+   
 **POST /api/book**
 
 Body:
@@ -126,7 +128,8 @@ Respuesta:
 
 ```
 
-3. Editar un libro existente
+3. Editar un libro existente:
+   
 **PUT /api/book/:id**
 
 Body:
@@ -148,7 +151,8 @@ Respuesta:
 }
 ```
 
-4. Borrar un libro
+4. Borrar un libro:
+   
 **DELETE /api/book/:id**
 
 Respuesta:
